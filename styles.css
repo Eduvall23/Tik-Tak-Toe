@@ -1,1 +1,37 @@
+section{
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+}
+body{
+    display: flex;
+    justify-content: space-between;
+    margin:0;
+}
+main h1{
+    margin-top:100px;
+    margin-bottom: 100px;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(153, 103, 200);
+    width: 25%;
+}
+main{
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 
+}
+.tiktak-board{
+    gap: 40px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: white;
+    width: 70%;
+    text-align: center;
+
+}
