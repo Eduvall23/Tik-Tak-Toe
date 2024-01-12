@@ -1,37 +1,48 @@
-section{
-    display: flex;
-    width: 30%;
-    justify-content: space-evenly;
+section {
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
 }
-body{
-    display: flex;
-    justify-content: space-between;
-    margin:0;
+body {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
 }
-main h1{
-    margin-top:100px;
-    margin-bottom: 100px;
+main h1 {
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
-div{
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(153, 103, 200);
+  width: 25%;
+}
+main {
+  width: 50%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  background-color: white;
+  width: max-content;
+  grid-gap: 1px;
+}
+.space{
+    width: 100px;
+    height: 100px;
+    border: 2px solid #000;
+    font-size: 24px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    background-color: rgb(153, 103, 200);
-    width: 25%;
-}
-main{
-    width: 50%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
 
 }
-.tiktak-board{
-    gap: 40px;
-    display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: white;
-    width: 70%;
-    text-align: center;
-
+h2{
+    margin-right: 10;
 }
