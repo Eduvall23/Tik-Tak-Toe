@@ -30,14 +30,14 @@ var player2 = {
 };
 
 var winngingCombos = [
-  ["abc"],
-  ["def"],
-  ["ghi"],
-  ["adg"],
-  ["beh"],
-  ["cfi"],
-  ["aei"],
-  ["ceg"],
+  ["a", "b", "c"],
+  ["d", "e", "f"],
+  ["g", "h", "i"],
+  ["a", "d", "g"],
+  ["b", "e", "h"],
+  ["c", "f", "i"],
+  ["a", "e", "i"],
+  ["c", "e", "g"],
 ];
 
 var playerSwap = false;
@@ -56,32 +56,33 @@ function updateCell(cell) {
   if (!cell.innerHTML) {
     playersTurn.moves += cell.id;
     cell.innerHTML = playersTurn.team;
+    console.log(playersTurn.name + " " + playersTurn.moves);
+    console.log("sorted " + sortMoves());
     checkWin();
     turns++;
   }
 }
 
 function sortMoves() {
-  return playersTurn.moves.split("").sort().join("");
+  return playersTurn.moves.split("").sort().join(" ");
 }
 
 function checkWin() {
   for (var i = 0; i < winngingCombos.length; i++) {
-    var sortedMoves = sortMoves();
-    if (sortedMoves.includes(winngingCombos[i])) {
+    if (checkWinningCombo(winngingCombos[i])) {
       currentPlayer.innerHTML = `${playersTurn.name} won!`;
       playersTurn.wins++;
-      updateHtml()
-      resetGame()
-      return
+      updateHtml();
+      resetGame();
+      return;
     } else if (turns === 9) {
       currentPlayer.innerHTML = `It's a draw!`;
-      updateHtml()
-      resetGame()
-      return
+      updateHtml();
+      resetGame();
+      return;
     }
   }
-  changeTurns()
+  changeTurns();
 }
 
 function resetGame() {
@@ -106,10 +107,18 @@ function clearBoard() {
 function updatePlayer() {
   player1.moves = "";
   player2.moves = "";
-  turns = 0
-  changeTurns()
+  turns = 0;
+  changeTurns();
 }
 function updateHtml() {
   p1Wins.innerHTML = player1.wins;
   p2wins.innerHTML = player2.wins;
+}
+function checkWinningCombo(winningCombo) {
+  for (var i = 0; i < winningCombo.length; i++) {
+    if (!playersTurn.moves.includes(winningCombo[i])) {
+      return false;
+    }
+  }
+  return true;
 }
