@@ -75,14 +75,13 @@ function checkWin() {
       return;
     }
   }
-  if (turns === 8) {
+  turns++;
+  if (turns === 9) {
     currentPlayer.innerHTML = `It's a draw!`;
     updateHtml();
     resetGame();
     return;
   }
-
-  turns++;
   changeTurns();
 }
 
