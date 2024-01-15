@@ -56,10 +56,8 @@ function updateCell(cell) {
   if (!cell.innerHTML) {
     playersTurn.moves += cell.id;
     cell.innerHTML = playersTurn.team;
-    console.log(playersTurn.name + " " + playersTurn.moves);
-    console.log("sorted " + sortMoves());
     checkWin();
-    turns++;
+    console.log(turns);
   }
 }
 
@@ -75,12 +73,14 @@ function checkWin() {
       updateHtml();
       resetGame();
       return;
-    } else if (turns === 9) {
-      currentPlayer.innerHTML = `It's a draw!`;
-      updateHtml();
-      resetGame();
-      return;
     }
+  }
+  turns++;
+  if (turns === 9) {
+    currentPlayer.innerHTML = `It's a draw!`;
+    updateHtml();
+    resetGame();
+    return;
   }
   changeTurns();
 }
