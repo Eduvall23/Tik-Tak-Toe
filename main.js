@@ -122,11 +122,11 @@ function decideStartingPlayer() {
   if (startingPlayer === player1) {
     playersTurn = player2;
     startingPlayer = player2;
-    playerSwap = false;
+    playerSwap = true;
   } else {
     playersTurn = player1;
     startingPlayer = player1;
-    playerSwap = true;
+    playerSwap = false;
   }
   currentPlayer.innerHTML = `It's ${playersTurn.name}'s turn`;
 }
@@ -144,8 +144,6 @@ function checkDraw() {
   return false
 }
 function checkGameStatus(){
-    console.log(checkDraw())
-    console.log(checkWin())
     if(!checkDraw() && !checkWin()){
         changeTurns()
     }
