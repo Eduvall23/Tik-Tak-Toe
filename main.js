@@ -39,7 +39,7 @@ var winngingCombos = [
   ["a", "e", "i"],
   ["c", "e", "g"],
 ];
-
+var startingPlayer = player1;
 var playerSwap = false;
 
 function changeTurns() {
@@ -50,6 +50,7 @@ function changeTurns() {
   }
   playerSwap = !playerSwap;
   currentPlayer.innerHTML = `It's ${playersTurn.name}'s turn`;
+  turns++
 }
 
 function updateCell(cell) {
@@ -57,7 +58,7 @@ function updateCell(cell) {
     playersTurn.moves += cell.id;
     cell.innerHTML = playersTurn.team;
     checkWin();
-    console.log(turns);
+    checkDraw();
   }
 }
 
@@ -69,20 +70,12 @@ function checkWin() {
   for (var i = 0; i < winngingCombos.length; i++) {
     if (checkWinningCombo(winngingCombos[i])) {
       currentPlayer.innerHTML = `${playersTurn.name} won!`;
-      playersTurn.wins++;
+      increaseWins();
       updateHtml();
       resetGame();
       return;
     }
   }
-  turns++;
-  if (turns === 9) {
-    currentPlayer.innerHTML = `It's a draw!`;
-    updateHtml();
-    resetGame();
-    return;
-  }
-  changeTurns();
 }
 
 function resetGame() {
@@ -90,6 +83,7 @@ function resetGame() {
     winner = false;
     clearBoard();
     updatePlayer();
+    decideStartingPlayer();
   }, 1000);
 }
 
@@ -108,7 +102,6 @@ function updatePlayer() {
   player1.moves = "";
   player2.moves = "";
   turns = 0;
-  changeTurns();
 }
 function updateHtml() {
   p1Wins.innerHTML = player1.wins;
@@ -121,4 +114,29 @@ function checkWinningCombo(winningCombo) {
     }
   }
   return true;
+}
+function decideStartingPlayer() {
+  console.log(startingPlayer);
+  if (startingPlayer === player1) {
+    playersTurn = player2;
+    startingPlayer = player2;
+    playerSwap = false;
+  } else {
+    playersTurn = player1;
+    startingPlayer = player1;
+    playerSwap = true;
+  }
+  currentPlayer.innerHTML = `It's ${playersTurn.name}'s turn`;
+}
+function increaseWins() {
+  playersTurn.wins++;
+}
+function checkDraw(){
+    if (turns === 8) {
+        currentPlayer.innerHTML = `It's a draw!`;
+        updateHtml();
+        resetGame();
+        return
+      }
+changeTurns()
 }

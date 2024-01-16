@@ -46,3 +46,15 @@ main {
 h2{
     margin-right: 10;
 }
+#a,#b,#c{
+    border-top: none;
+}
+#a,#d,#g{
+    border-left: none;
+}
+#g,#h,#i{
+    border-bottom: none;
+}
+#c,#f,#i{
+    border-right:none;
+}
