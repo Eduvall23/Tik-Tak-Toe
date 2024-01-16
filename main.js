@@ -14,7 +14,7 @@ addEventListener("load", loadPage);
 var winner = false;
 var turns = 0;
 var playersTurn;
-
+var active = true;
 var player1 = {
   name: "Gojo",
   team: "X",
@@ -50,16 +50,15 @@ function changeTurns() {
   }
   playerSwap = !playerSwap;
   currentPlayer.innerHTML = `It's ${playersTurn.name}'s turn`;
-  turns++
+  turns++;
 }
 
 function updateCell(cell) {
-  if (!cell.innerHTML) {
-    playersTurn.moves += cell.id;
-    cell.innerHTML = playersTurn.team;
-    checkWin();
-    checkDraw();
-  }
+    if (!cell.innerHTML && active) {
+      playersTurn.moves += cell.id;
+      cell.innerHTML = playersTurn.team;
+      checkGameStatus()
+    }
 }
 
 function sortMoves() {
@@ -70,12 +69,14 @@ function checkWin() {
   for (var i = 0; i < winngingCombos.length; i++) {
     if (checkWinningCombo(winngingCombos[i])) {
       currentPlayer.innerHTML = `${playersTurn.name} won!`;
+      active = false
       increaseWins();
       updateHtml();
       resetGame();
-      return;
+      return true;
     }
   }
+  return false  
 }
 
 function resetGame() {
@@ -84,6 +85,7 @@ function resetGame() {
     clearBoard();
     updatePlayer();
     decideStartingPlayer();
+    active = true;
   }, 1000);
 }
 
@@ -120,23 +122,29 @@ function decideStartingPlayer() {
   if (startingPlayer === player1) {
     playersTurn = player2;
     startingPlayer = player2;
-    playerSwap = false;
+    playerSwap = true;
   } else {
     playersTurn = player1;
     startingPlayer = player1;
-    playerSwap = true;
+    playerSwap = false;
   }
   currentPlayer.innerHTML = `It's ${playersTurn.name}'s turn`;
 }
 function increaseWins() {
   playersTurn.wins++;
 }
-function checkDraw(){
-    if (turns === 8) {
-        currentPlayer.innerHTML = `It's a draw!`;
-        updateHtml();
-        resetGame();
-        return
-      }
-changeTurns()
+function checkDraw() {
+  if (turns === 8) {
+    active = false;
+    currentPlayer.innerHTML = `It's a draw!`;
+    updateHtml();
+    resetGame();
+    return true;
+  }
+  return false
+}
+function checkGameStatus(){
+    if(!checkDraw() && !checkWin()){
+        changeTurns()
+    }
 }
