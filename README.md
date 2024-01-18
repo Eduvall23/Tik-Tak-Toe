@@ -12,7 +12,7 @@
 - As well as the depolyed project is [here]([https://eduvall23.github.io/Tik-Tak-Toe/])
 
 ## Preview
-![]((https://github.com/Eduvall23/Tik-Tak-Toe/blob/main/animated.GIF))
+![](https://github.com/Eduvall23/Tik-Tak-Toe/blob/main/animated.GIF)
 ## Context
 - Completing a working Tik-Tak-Toe game from scratch using css javascript and html
 - I am now 6 weeks into the fornt end program at Turing 
